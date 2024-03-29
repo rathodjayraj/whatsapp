@@ -1,0 +1,627 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>POS</title>
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="" />
+        <meta property="og:type" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:image" content="" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {% comment %} <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" /> {% endcomment %}
+        
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+       
+
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.5.2/dist/select2-bootstrap4.min.css">
+        
+       
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'posstatic/assets/img/favicon.png' %}">
+		
+        <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="{% static 'posstatic/assets/css/bootstrap.min.css' %}">
+
+        <!-- Datetimepicker CSS -->
+        <link rel="stylesheet" href="{% static 'posstatic/assets/css/bootstrap-datetimepicker.min.css' %}">
+        
+        <!-- animation CSS -->
+        <link rel="stylesheet" href="{% static 'posstatic/assets/css/animate.css' %}">
+
+        <!-- Owl Carousel CSS -->
+        <link rel="stylesheet" href="{% static 'posstatic/assets/plugins/owlcarousel/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static 'posstatic/assets/plugins/owlcarousel/owl.theme.default.min.css' %}">
+
+
+        <!-- Select2 CSS -->
+        <link rel="stylesheet" href="{% static 'posstatic/assets/plugins/select2/css/select2.min.css' %}">
+
+
+        <!-- Datatable CSS -->
+        <link rel="stylesheet" href="{% static 'posstatic/assets/css/dataTables.bootstrap4.min.css' %}">
+        
+            <!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{% static 'posstatic/assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'posstatic/assets/plugins/fontawesome/css/all.min.css' %}">
+        
+        <!-- Main CSS -->
+        <link rel="stylesheet" href="{% static 'posstatic/assets/css/style.css' %}">
+
+
+
+
+        {% block style %}
+        {% endblock style %}
+        <style>
+
+          .search-set{
+            display:contents;
+          }
+
+            .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            }
+            
+            .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+            }
+            
+            .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            }
+            
+            .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            }
+            
+            input:checked + .slider {
+            background-color: #ff9f43;
+            }
+            
+            input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+            }
+            
+            input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+            }
+            
+            /* Rounded sliders */
+            .slider.round {
+            border-radius: 34px;
+            }
+            
+            .slider.round:before {
+            border-radius: 50%;
+            }
+            .fix {
+                position: absolute;
+                *position: relative; /*ie7*/
+                margin-left: -100px;
+                width: 100px;
+              }
+        </style>
+        <style>
+            .label_customer:hover{
+                background-color:#637381;
+                cursor: pointer;
+                color:#ffffff;
+            }
+
+            
+{% comment %} 
+            table.dataTable > thead .sorting::after, table.dataTable > thead .sorting_asc::after, table.dataTable > thead .sorting_desc::after, table.dataTable > thead .sorting_asc_disabled::after, table.dataTable > thead .sorting_desc_disabled::after {
+                right: 0.5em;
+                content: "\f107";
+                top: 14px;
+                color: black;
+                font-size: 12px;
+                opacity: unset !important;
+              }
+
+              table.dataTable thead > tr > th.sorting::before, table.dataTable thead > tr > th.sorting::after, table.dataTable thead > tr > th.sorting_asc::before, table.dataTable thead > tr > th.sorting_asc::after, table.dataTable thead > tr > th.sorting_desc::before, table.dataTable thead > tr > th.sorting_desc::after, table.dataTable thead > tr > th.sorting_asc_disabled::before, table.dataTable thead > tr > th.sorting_asc_disabled::after, table.dataTable thead > tr > th.sorting_desc_disabled::before, table.dataTable thead > tr > th.sorting_desc_disabled::after, table.dataTable thead > tr > td.sorting::before, table.dataTable thead > tr > td.sorting::after, table.dataTable thead > tr > td.sorting_asc::before, table.dataTable thead > tr > td.sorting_asc::after, table.dataTable thead > tr > td.sorting_desc::before, table.dataTable thead > tr > td.sorting_desc::after, table.dataTable thead > tr > td.sorting_asc_disabled::before, table.dataTable thead > tr > td.sorting_asc_disabled::after, table.dataTable thead > tr > td.sorting_desc_disabled::before, table.dataTable thead > tr > td.sorting_desc_disabled::after {
+                position: absolute;
+                display: block;
+                opacity:unset;
+                right: 10px;
+                line-height: 9px;
+                font-size: .8em;
+                color: black;
+              } {% endcomment %}
+        </style>
+
+        {% comment %} CSS for Add Sale Customer Drop Down{% endcomment %}
+        <style>
+
+                    /* Container style */
+                    #c_list , #s_list, #get_product  {
+                        max-height: 300px;
+                        overflow-x: scroll;
+                        overflow-y: scroll;
+                        
+                        padding: 10px;
+                        position: absolute;
+                        z-index: 999;
+                        top: 80%;
+                        left:0;
+                        background: #fff;
+                      }
+                      #c_list::-webkit-scrollbar{
+                        display: none;
+                      }
+                      #s_list::-webkit-scrollbar{
+                        display: none;
+                      }
+                      #get_product::-webkit-scrollbar{
+                        display: none;
+                      }
+                      
+                      /* Customer item style */
+                      .label_customer {
+                        cursor: pointer;
+                        padding: 1px;
+                        background-color: #ffffff;
+                        border: 1px solid #e0e0e0;
+                        border-radius: 15px; /* Add border-radius for rounded corners */
+                        margin-bottom: 0px;
+                        transition: background-color 0.3s ease;
+                      }
+                      
+                      /* Hover effect for better user experience */
+                      .label_customer:hover {
+                        background-color: #f49030; /* Change background color on hover to #f49030 */
+                        transition: background-color 0.3s ease;
+                      }
+                      
+                      /* Labels inside customer item style */
+                      .label_customer label {
+                        display: block;
+                        margin-bottom: 5px;
+                        color: #333; /* Set label text color */
+                      }
+                      
+                      /* Horizontal line style */
+                      .label_customer hr {
+                        border: none;
+                        border-top: 1px solid #e0e0e0;
+                        margin: 10px 0;
+                        width: 248px;
+
+                        font-size: 12px;
+
+                      }
+                      
+                      /* Adjustments for better spacing */
+                      .label_customer:last-child {
+                        margin-bottom: 0;
+                      }
+                      
+                      /* Change mouse pointer on hover */
+                      .label_customer:hover {
+                        cursor: pointer;
+                      }
+                      
+                      .page-header .btn-added {
+                        color:white !important; 
+                      } 
+                      .select2-container {
+                     
+                        width: unset !important; 
+                        display: unset !important;
+                    }
+        </style>
+    </head>
+
+    <body > 
+      <div id="global-loader" >
+        <div class="whirly-loader"> </div>
+      </div>
+    <div class="main-wrapper">
+        <div class="screen-overlay"></div>
+        {% include 'adminTemplate/sidebar.html'%}
+        
+        
+            
+            {% include 'adminTemplate/header.html' %}  
+     
+
+            {%block body%}
+
+            {% endblock %}
+    </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+        <script src="{% static 'posstatic/assets/js/jquery-3.6.0.min.js' %}"></script>
+        <script>
+
+            function allowNumbersOnly(e) {
+                var code = (e.which) ? e.which : e.keyCode;
+                if (code > 31 && (code < 48 || code > 57)) {
+                    e.preventDefault();
+                }
+            }
+
+
+
+
+            function exportToExcel(name) {
+                $('#yourTableID .removefield').remove();
+                 
+                var table = document.getElementById('yourTableID');
+ 
+                 var wb = XLSX.utils.table_to_book(table, { sheet: 'Sheet1' });
+             
+                 XLSX.writeFile(wb, name+'.xlsx');
+                 location.reload();
+ 
+             }
+             function exportToExcel1(name) {
+                 $('#excel1 .removefield').remove();
+                  
+                 var table = document.getElementById('excel1');
+  
+                  var wb = XLSX.utils.table_to_book(table, { sheet: 'Sheet1' });
+              
+                  XLSX.writeFile(wb, name+'.xlsx');
+                  location.reload();
+  
+              }
+              function exportToExcel2(name) {
+                 $('#excel2 .removefield').remove();
+                  
+                 var table = document.getElementById('excel2');
+  
+                  var wb = XLSX.utils.table_to_book(table, { sheet: 'Sheet1' });
+              
+                  XLSX.writeFile(wb, name+'.xlsx');
+                  location.reload();
+  
+              }
+        </script>
+
+        <script>
+            $('#datefilterfrom').change(function () {
+                var date = moment(this.value).format('DD/MM/YYYY');
+                var filter, table, tr, td, i;
+                filter = date.toUpperCase();
+                table = document.getElementById("yourTableID");
+                console.log(filter,'ffffffffffffff')
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByClassName("filter_date")[0];
+                    console.log(td)
+               //td= tr[i].getElementsByTagName("td");
+               
+                    
+                if (td) {
+                    if(date=="Invalid date"){
+                        tr[i].style.display = "";
+                   
+
+                    }else{
+                    
+
+                        
+                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            console.log("inside iffffffffffffffff") 
+                        } else {
+                            tr[i].style.display = "none";
+                            console.log("inside elseeeeeeeeeeee")
+                        }
+                    }
+                }
+                
+            }
+       
+
+        
+        });
+
+        $('#datefilterfrom1').change(function () {
+          var date = moment(this.value).format('DD/MM/YYYY');
+          var filter, table, tr, td, i;
+          filter = date.toUpperCase();
+          table = document.getElementById("excel1");
+          console.log(filter,'ffffffffffffff')
+          tr = table.getElementsByTagName("tr");
+          for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByClassName("filter_date")[0];
+              console.log(td)
+         //td= tr[i].getElementsByTagName("td");
+         
+              
+          if (td) {
+              if(date=="Invalid date"){
+                  tr[i].style.display = "";
+             
+
+              }else{
+              
+
+                  
+                  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      tr[i].style.display = "";
+                      console.log("inside iffffffffffffffff") 
+                  } else {
+                      tr[i].style.display = "none";
+                      console.log("inside elseeeeeeeeeeee")
+                  }
+              }
+          }
+          
+      }
+    });
+
+    $('#datefilterfrom2').change(function () {
+      var date = moment(this.value).format('DD/MM/YYYY');
+      var filter, table, tr, td, i;
+      filter = date.toUpperCase();
+      table = document.getElementById("excel2");
+      console.log(filter,'ffffffffffffff')
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByClassName("filter_date")[0];
+          console.log(td)
+     //td= tr[i].getElementsByTagName("td");
+     
+          
+      if (td) {
+          if(date=="Invalid date"){
+              tr[i].style.display = "";
+         
+
+          }else{
+          
+
+              
+              if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                  console.log("inside iffffffffffffffff") 
+              } else {
+                  tr[i].style.display = "none";
+                  console.log("inside elseeeeeeeeeeee")
+              }
+          }
+      }
+      
+  }
+});
+
+
+function searchDate() {
+    var input_startDate, input_stopDate, tr, i;
+    // get the values and convert to date
+    input_startDate =  new Date(document.getElementById("startdate").value);
+    input_stopDate =  new Date(document.getElementById("enddate").value);
+    //let day = input_startDate.getDate();
+    //let month = input_startDate.getMonth();
+    //let year = input_startDate.getFullYear();
+
+    //let day1 = input_stopDate.getDate();
+    //let month1 = input_stopDate.getMonth();
+    //let year1 = input_stopDate.getFullYear();
+
+    // input_startDate = day + "/" + month + "/" + year;
+     //input_stopDate = day1 + "/" + month1 + "/" + year1;
+
+    console.log(document.getElementById("startdate").value,'input_startDate')
+    console.log(input_stopDate,'input_stopDate')
+
+    
+  tr = document.querySelectorAll("#yourTableID tbody tr");
+
+  for (let i = 0; i < tr.length; i++) {
+    // ensure we have a relevant td
+    let td = tr[i].getElementsByClassName("dateclass");
+    if (!td || !td[0]) continue;
+    // you need to get the text and convert to date
+    let td_date = new Date(td[0].textContent);
+    console.log(td_date,'yyyyyyyyyyyyyyyy');
+    // now you can compare dates correctly
+    if(input_stopDate == "Invalid Date" ||  input_startDate == "Invalid Date"){
+
+    }else{
+
+        if (td_date) {
+            if (td_date >= input_startDate && td_date <= input_stopDate) {
+                // show the row by setting the display property
+                tr[i].style.display = 'table-row';
+                console.log("insinde iff")
+            } else {
+                console.log("insinde lseeeeeeee")
+                // hide the row by setting the display property
+                tr[i].style.display = 'none';
+            }
+                
+                
+            }
+    }
+  }
+}
+        
+</script>
+<script>
+  function printDiv()
+  {
+      
+      $(".invoiceulhide").hide();
+
+      var divToPrint=document.getElementById("outprint");
+
+      newWin= window.open("");
+      newWin.document.write(divToPrint.outerHTML);
+      $(".invoiceulhide").show();
+
+      newWin.print();
+      newWin.close();
+        
+  }
+  </script>
+
+      
+
+
+            {% comment %} {% include 'footer.html'%} {% endcomment %}
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+            
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+        <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+
+        <!-- Main Script -->
+        {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script> {% endcomment %}
+
+        
+        <!-- to use htmx in html with python  -->
+        <script src="https://cdn.jsdelivr.net/npm/htmx.org/dist/htmx.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" integrity="sha512-2bMhOkE/ACz21dJT8zBOMgMecNxx0d37NND803ExktKiKdSzdwn+L7i9fdccw/3V06gM/DBWKbYmQvKMdAA9Nw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+        
+
+        <!-- jQuery -->
+        <script src="{% static 'posstatic/assets/js/jquery-3.6.0.min.js' %}"></script>
+
+        <!-- Feather Icon JS -->
+        <script src="{% static 'posstatic/assets/js/feather.min.js' %}"></script>
+
+        <!-- Slimscroll JS -->
+        <script src="{% static 'posstatic/assets/js/jquery.slimscroll.min.js' %}"></script>
+
+        <!-- Datatable JS -->
+        <script src="{% static 'posstatic/assets/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'posstatic/assets/js/dataTables.bootstrap4.min.js' %}"></script>
+        
+        <!-- Bootstrap Core JS -->
+        <script src="{% static 'posstatic/assets/js/bootstrap.bundle.min.js' %}"></script>
+
+        <!-- Chart JS -->
+        <script src="{% static 'posstatic/assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+        <script src="{% static 'posstatic/assets/plugins/apexchart/chart-data.js' %}"></script>
+        
+        <!-- Owl JS -->
+		<script src="{% static 'posstatic/assets/plugins/owlcarousel/owl.carousel.min.js' %}"></script>
+
+
+        <!-- Custom JS -->
+        <script src="{% static 'posstatic/assets/js/script.js' %}"></script>
+       
+         <!-- Datetimepicker js -->
+		<script src="{% static 'posstatic/assets/js/moment.min.js' %}"></script>
+		<script src="{% static 'posstatic/assets/js/bootstrap-datetimepicker.min.js' %}"></script>
+		
+        
+        <!-- Sweetalert 2 -->
+		{% comment %} <script src="{% static 'posstatic/assets/plugins/sweetalert/sweetalert2.all.min.js' %}"></script>
+		<script src="{% static 'posstatic/assets/plugins/sweetalert/sweetalerts.min.js' %}"></script> {% endcomment %}
+
+	
+   
+        <script>
+        
+            $(document).ready(function() {
+                $('.select2').select2();
+                if($('#sales_charts').length > 0) {
+                    var options = {
+                        series: [{
+                        name: 'Sales',
+                        data: [{% for i in new_recored1.sale %} "{{i}}", {% endfor %}],
+                      }, {
+                        name: 'Purchase',
+                        data: [{% for i in new_recored1.purchase %} "{{i}}", {% endfor %}]
+                      }],
+                      colors: ['#28C76F', '#EA5455'],
+                        chart: {
+                        type: 'bar',
+                        height: 300,
+                        stacked: true,
+                        
+                        zoom: {
+                          enabled: true
+                        }
+                      },
+                      responsive: [{
+                        breakpoint: 280,
+                        options: {
+                          legend: {
+                            position: 'bottom',
+                            offsetY: 0
+                          }
+                        }
+                      }],
+                      plotOptions: {
+                        bar: {
+                          horizontal: false,
+                          columnWidth: '20%',
+                          endingShape: 'rounded'
+                        },
+                      },
+                      xaxis: {
+                        categories: [' January ', 'February', 'March', 'April',
+                          'May', 'June' , 'July' , 'August','September','October','November','December'
+                        ],
+                      },
+                      legend: {
+                        position: 'right',
+                        offsetY: 40
+                      },
+                      fill: {
+                        opacity: 1
+                      }
+                      };
+                
+                      var chart = new ApexCharts(document.querySelector("#sales_charts"), options);
+                      chart.render();
+                    }
+            
+            });
+            
+                    </script>
+  </body>
+</html>
+

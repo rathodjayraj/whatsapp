@@ -1,0 +1,128 @@
+{% extends 'adminTemplate/base.html' %}
+
+{% load static %}
+
+{% block body  %}
+			<div class="page-wrapper">
+				<div class="content">
+					<div class="page-header">
+						<div class="page-title">
+							<h4>Contact List</h4>
+							<h6>Manage your Contact management
+								</h6>
+						</div>
+						
+
+					</div>
+				
+					<!-- /product list -->
+					<div class="card">
+						<div class="card-body">
+							<div class="table-top">
+								<div class="search-set">
+									{% comment %} <div class="search-path">
+										<a class="btn btn-filter" id="filter_search">
+											<img src="assets/img/icons/filter.svg" alt="img">
+											<span><img src="assets/img/icons/closes.svg" alt="img"></span>
+										</a>
+									</div> {% endcomment %}
+								</div>
+								<div class="wordset">
+								</div>
+							</div>
+
+
+							<div class="row" >	{{data2}}						
+								<div class="col-md-4" style="border: 1px solid gray;overflow: auto;height:500px;">
+									{% for contactlist in data %}
+									<div class="row" onclick="myfunction({{contactlist.id}});">
+
+									<h6>	
+												{% if contactlist.avatar %}
+													<img src="{{contactlist.avatar}}" class="rounded-circle" style="height:50px;margin-top:10px;" >
+	
+												{% else %}
+													<img src="{% static 'posstatic/assets/img/user.png' %}" class="rounded-circle" style="height:50px;margin-top:10px;" >
+
+												{% endif%}
+													<span> {{contactlist.name}} - {{contactlist.phone}}</span></h6>
+													<p>{{contactlist.last_message}}</p>												
+													<hr>
+												
+									</div>
+									{% endfor %}
+									
+
+								</div>
+								<div class="col-md-1">
+								</div> 
+								<div class="col-md-7" style="border: 1px solid gray;overflow: auto;height:500px;">
+									<h2>test</h2>
+								</div>
+							</div>
+								
+						</div>
+					</div>
+					<!-- /product list -->
+				</div>
+			</div>
+        </div>
+		<!-- /Main Wrapper -->
+
+		<!-- show payment Modal -->
+		<div class="modal fade" id="showpayment" tabindex="-1" aria-labelledby="showpayment" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Show Payments</h5>
+						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					</div>
+					<div class="modal-body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Date</th>
+										<th>Reference</th>
+										<th>Amount	</th>
+										<th>Paid By	</th>
+										<th>Paid By	</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="bor-b1">
+										<td>2022-03-07	</td>
+										<td>INV/SL0101</td>
+										<td>$ 1500.00	</td>
+										<td>Cash</td>
+										<td>
+											<a class="me-2" href="javascript:void(0);">
+												<img src="assets/img/icons/printer.svg" alt="img">
+											</a>
+											<a class="me-2" href="javascript:void(0);" data-bs-target="#editpayment" data-bs-toggle="modal" data-bs-dismiss="modal" >
+												<img src="assets/img/icons/edit.svg" alt="img">
+											</a>
+											<a class="me-2 confirm-text" href="javascript:void(0);">
+												<img src="assets/img/icons/delete.svg" alt="img">
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- show payment Modal -->
+
+
+		<script>
+			function myfunction(id){
+				
+				alert(id);
+			}
+
+			myfunction
+		</script>
+		{% endblock body  %}

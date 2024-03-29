@@ -1,0 +1,530 @@
+{% load static %}
+
+
+{% if role == "admin" %}
+
+{% if sidebar_var != "pos"  %}
+	<!-- Sidebar -->
+    <div class="sidebar sidebar-four" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu sidebar-menu-three">
+            
+                <!--<aside id="aside" class="ui-aside">
+                  <ul class="tab nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="tablinks nav-link active" href="#home" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"  role="tab" aria-controls="home" aria-selected="true">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon.svg' %}" alt="">
+                        </a>
+                    </li>
+                    {% comment %} <li class="nav-item" role="presentation">
+                        <a class="tablinks nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"  role="tab" aria-controls="messages" aria-selected="false">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-01.svg' %}" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation"> 
+                        <a class="tablinks nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"  role="tab" aria-controls="profile" aria-selected="false">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-02.svg' %}" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation"> 
+                        <a class="tablinks nav-link" id="app-tab" data-bs-toggle="tab" data-bs-target="#app"  role="tab" aria-controls="app" aria-selected="false">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-04.svg' %}" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="tablinks nav-link" href="#report" id="report-tab" data-bs-toggle="tab" data-bs-target="#report"  role="tab" aria-controls="report" aria-selected="true">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-05.svg' %}" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="tablinks nav-link" href="#set" id="set-tab" data-bs-toggle="tab" data-bs-target="#set"  role="tab" aria-controls="set" aria-selected="true">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-06.svg' %}" alt="">
+                        </a>
+                    </li> {% endcomment %}
+                  </ul>
+                </aside> -->
+                <div class="tab-content tab-content-four pt-2">
+                    <ul class="tab-pane active" id="home" aria-labelledby="home-tab">
+                        <li><a href="{% url 'dashboard' %}" ><span> Dashboard</span> </a></li>
+                            
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Product</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'products' %}">Product </a></li>
+                                    <li><a href="{% url 'category' %}">Category </a></li>
+                                    {% comment %} <li><a href="{% url 'addcategory' %}">Add Category</a></li> {% endcomment %}
+                                    <li><a href="{% url 'show_sub_category' %}">Sub Category </a></li>
+                                    <li><a href="{% url 'show_brand' %}">Brand </a></li>
+                                    <li><a href="{% url 'unitlists' %}">Unit </a></li>
+                                    <li><a href="{% url 'show_tax' %}">Tax </a></li>
+                                    <li><a href="{% url 'show_product_inquiry' %}"> Inquiry </a></li>
+                                   
+                                    {% comment %} <li><a href="{% url 'add_tax' %}">Add Tax</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="{% url 'addunit' %}">Add Unit</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="{% url 'addproduct' %}">Add Product</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="{% url 'add_sub_category' %}">Add Sub Category</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="{% url 'add_brand' %}">Add Brand</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="{% url 'add_product_inquiry' %}">Add Product Inquiry</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="barcode.html">Print Barcode</a></li> {% endcomment %}
+                                </ul>
+                            </li>                                    
+                             <li class="submenu">
+                                <a href="javascript:void(0);"><span> Sales</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'saleslist' %}">Sales List</a></li>
+                                    {% comment %} <li><a href="pos.html">POS</a></li> {% endcomment %}
+                                    <li><a href="{% url 'addsales' %}">New Sales</a></li>
+                                    <li><a href="{% url 'pos' %}">POS</a></li>
+                                   
+                                    {% comment %} <li><a href="salesreturnlists.html">Sales Return List</a></li>
+                                    <li><a href="createsalesreturns.html">New Sales Return</a></li> {% endcomment %}
+                                </ul>
+                            </li>  
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Purchase</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'show_purchase' %}">Purchase List</a></li>
+                                    <li><a href="{% url 'add_purchase' %}">Add Purchase</a></li>
+                                    <li><a href="{% url 'show_stock' %}">Stock List</a></li>
+                                    {% comment %} <li><a href="{% url 'add_stock' %}">Add Stock</a></li> {% endcomment %}
+                                    {% comment %} <li><a href="importpurchase.html">Import Purchase</a></li> {% endcomment %}
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Expense</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'show_expance' %}">Expense List</a></li>
+                                    <li><a href="{% url 'add_expance' %}">Add Expense</a></li>
+                                    <li><a href="{% url 'show_expance_category' %}">Expense Category List</a></li>
+                                    <li><a href="{% url 'add_expance_category' %}">Add Expense Category</a></li>
+                                </ul>
+                            </li>   
+                            {% comment %} <li class="submenu">
+                                <a href="javascript:void(0);"><span> Quotation</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="quotationList.html">Quotation List</a></li>
+                                    <li><a href="addquotation.html">Add Quotation</a></li>
+                                </ul>
+                            </li> {% endcomment %}
+                            {% comment %} <li class="submenu">
+                                <a href="javascript:void(0);"><span> Transfer</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="transferlist.html">Transfer  List</a></li>
+                                    <li><a href="addtransfer.html">Add Transfer </a></li>
+                                    <li><a href="importtransfer.html">Import Transfer </a></li>
+                                </ul>
+                            </li> {% endcomment %}
+                             <li class="submenu">
+                                <a href="javascript:void(0);"><span> Return</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'salesreturnlist' %}">Sales Return List</a></li>
+                                    <li><a href="{% url 'addsalesreturn' %}">Add Sales Return </a></li>
+                                    <li><a href="{% url 'show_purchase_return'%}">Purchase Return List</a></li>
+                                    <li><a href="{% url 'add_purchase_return'%}">Add Purchase Return </a></li>
+                                </ul>
+                            </li> 
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> People</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'show_customer'%}">Customer List</a></li>
+                                    <li><a href="{% url 'add_customer' %}">Add Customer  </a></li>
+                                    <li><a href="{% url 'show_supplier'%}">Supplier List</a></li>
+                                    <li><a href="{% url 'add_supplier' %}">Add Supplier </a></li>
+                                    
+
+                                     {% comment %} <li><a href="userlist.html">User List</a></li>
+                                    <li><a href="adduser.html">Add User</a></li> 
+                                    <li><a href="storelist.html">Store List</a></li>
+                                    <li><a href="addstore.html">Add Store</a></li>  {% endcomment %}
+                                </ul>
+                            </li>														
+                            {% comment %} <li class="submenu">
+                                <a href="javascript:void(0);"><span> Places</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'add_country' %}">New Country </a></li>
+                                    <li><a href="{% url 'show_country' %}">Country list</a></li>
+                                    <li><a href="{% url 'add_state' %}">New State</a></li>
+                                    <li><a href="{% url 'show_state' %}">State list</a></li>
+                                    <li><a href="{% url 'add_city' %}">New City </a></li>
+                                    <li><a href="{% url 'show_city' %}">City list</a></li>
+                                </ul>
+                            </li> {% endcomment %}
+                            
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Reports</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'salesreport' %}">Sales Report</a></li>
+                                    <li><a href="{% url 'purchaseorderreport' %}">Purchase Report</a></li>
+                                    <li><a href="{% url 'inventoryreport' %}">Inventory Report</a></li>
+                                    <li><a href="{% url 'supplierreport' %}">Supplier Report</a></li>
+                                    <li><a href="{% url 'customerreport' %}">Customer Report</a></li>
+
+                                    
+                                </ul>
+                            </li>
+
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Staffs</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'stafflists' %}">Staff </a></li>
+                                    {% comment %} <li><a href="{% url 'addstaff' %}">New Staff </a></li> {% endcomment %}
+                                    <li><a href="{% url 'rolelists' %}">Role </a></li>
+                                    {% comment %} <li><a href="{% url 'addrole' %}">New Role </a></li> {% endcomment %}
+                                    {% comment %} <li><a href="{% url 'permissionlists' %}">Permission </a></li> {% endcomment %}
+                                    {% comment %} <li><a href="{% url 'addpermission' %}">New Permission </a></li> {% endcomment %}
+                                    {% comment %} <li><a href="{% url 'rolehaspermissionlists' %}">Role Has Permission </a></li> {% endcomment %}
+                                
+                                </ul>
+                            </li>
+                            
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Settings</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="{% url 'generaladd' %}">General Settings</a></li>
+                                    {% comment %} <li><a href="{% url 'currencysettingslist' %}">Currency Settings</a></li> {% endcomment %}
+                                   
+                                </ul>
+                            </li>    
+                            
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Payment Type Master </span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    {% comment %} <li><a href="{% url 'addpaymenttype' %}">New Payment Type</a></li> {% endcomment %}
+                                    <li><a href="{% url 'paymenttypelist' %}">Payment Type List</a></li>
+                                   
+                                </ul>
+                            </li>    
+                    </ul>
+                    
+                    
+                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Sidebar -->
+
+{% endif %}
+{% else %}
+
+	<!-- Sidebar -->
+    <div class="sidebar sidebar-four" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu sidebar-menu-three">
+                
+
+                <!--<aside id="aside" class="ui-aside">
+                  <ul class="tab nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="tablinks nav-link active" href="#home" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"  role="tab" aria-controls="home" aria-selected="true">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon.svg' %}" alt="">
+                        </a>
+                    </li>
+                    {% comment %} <li class="nav-item" role="presentation">
+                        <a class="tablinks nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages"  role="tab" aria-controls="messages" aria-selected="false">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-01.svg' %}" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation"> 
+                        <a class="tablinks nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"  role="tab" aria-controls="profile" aria-selected="false">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-02.svg' %}" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation"> 
+                        <a class="tablinks nav-link" id="app-tab" data-bs-toggle="tab" data-bs-target="#app"  role="tab" aria-controls="app" aria-selected="false">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-04.svg' %}" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="tablinks nav-link" href="#report" id="report-tab" data-bs-toggle="tab" data-bs-target="#report"  role="tab" aria-controls="report" aria-selected="true">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-05.svg' %}" alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="tablinks nav-link" href="#set" id="set-tab" data-bs-toggle="tab" data-bs-target="#set"  role="tab" aria-controls="set" aria-selected="true">
+                            <img src="{% static 'posstatic/assets/img/icons/menu-icon-06.svg' %}" alt="">
+                        </a>
+                    </li> {% endcomment %}
+                  </ul>
+                </aside> -->
+                
+                <div class="tab-content tab-content-four pt-2">
+                    <ul class="tab-pane active" id="home" aria-labelledby="home-tab">
+                        <li><a href="{% url 'dashboard' %}" ><span> Dashboard</span> </a></li>
+                            {% if "show-tax" in permission or  "show-unit" in permission or "show-products" in permission or "show-category" in permission or  "show-subcategory" in permission or "show-subcategory" in permission or "show-brand" in permission or "show-inquiry" in permission %}
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Product</span> <span class="menu-arrow"></span></a>
+                                <ul>
+
+                                    {% if "show-products" in permission %}
+                                    <li><a href="{% url 'products' %}">Product </a></li>
+                                    {% endif %}
+                                    
+
+                                    {% if "show-category" in permission %}
+                                    <li><a href="{% url 'category' %}">Category </a></li>
+                                    {% endif %}
+
+
+                                    {% if "show-subcategory" in permission %}
+                                    <li><a href="{% url 'show_sub_category' %}">Sub Category </a></li>
+                                    {% endif %}
+
+                                    {% if "show-brand" in permission %}
+                                    <li><a href="{% url 'show_brand' %}">Brand </a></li>
+                                    {% endif %}
+
+                                    {% if "show-unit" in permission %}
+                                    <li><a href="{% url 'unitlists' %}">Unit </a></li>
+                                    {% endif %}
+
+
+                                    {% if "show-tax" in permission %}
+                                    <li><a href="{% url 'show_tax' %}">Tax </a></li>
+                                    {% endif %}
+
+                                    
+                                    {% if "show-inquiry" in permission %}
+                                    <li><a href="{% url 'show_product_inquiry' %}">Product Inquiry </a></li>
+                                    {% endif %}
+                                    
+                                </ul>
+                            </li>   
+                            {% endif %}  
+                            
+                            {% if "show-sales" in permission or "add-sales" in permission or "show-pos" in permission %}
+                                <li class="submenu">
+                                    <a href="javascript:void(0);"><span> Sales</span> <span class="menu-arrow"></span></a>
+                                    <ul>
+                                        {% if "show-sales" in permission %}
+                                        <li><a href="{% url 'saleslist' %}">Sales List</a></li>
+                                        {% endif %}
+
+                                        {% if "add-sales" in permission %}
+                                        <li><a href="{% url 'addsales' %}">New Sales</a></li>
+                                        {% endif %}
+
+                                        {% if "show-pos" in permission %}
+                                        <li><a href="{% url 'pos' %}">POS</a></li>
+                                        {% endif %}
+                                    
+                                        {% comment %} <li><a href="salesreturnlists.html">Sales Return List</a></li>
+                                        <li><a href="createsalesreturns.html">New Sales Return</a></li> {% endcomment %}
+                                    </ul>
+                                </li>  
+                            {% endif %}
+
+                            {% if "show-purchase" in permissio or "add-purchase" in permission or "show-stock" in permission or "add-stock" in permission %}
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Purchase</span> <span class="menu-arrow"></span></a>
+                                <ul>
+
+                                    {% if "show-purchase" in permission %}
+                                    <li><a href="{% url 'show_purchase' %}">Purchase List</a></li>
+                                    {% endif %}
+
+                                    {% if "add-purchase" in permission %}
+                                    <li><a href="{% url 'add_purchase' %}">Add Purchase</a></li>
+                                    {% endif %}
+
+                                    {% if "show-stock" in permission %}
+                                    <li><a href="{% url 'show_stock' %}">Stock List</a></li>
+                                    {% endif %}
+                                    
+                                    {% if "add-stock" in permission %}
+                                    <li><a href="{% url 'add_stock' %}">Add Stock</a></li>
+                                    {% endif %}
+                                    {% comment %} <li><a href="importpurchase.html">Import Purchase</a></li> {% endcomment %}
+                                </ul>
+                            </li>
+                            {% endif %}
+
+                            {% if  "show-expense" in permission or "add-expense" in permission or "show-expense-category" in permission or "add-expense-category" in permission %}
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Expense</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    {% if "show-expense" in permission %}
+                                    <li><a href="{% url 'show_expance' %}">Expense List</a></li>
+                                    {% endif %}
+                                    
+                                    {% if "add-expense" in permission %}
+                                    <li><a href="{% url 'add_expance' %}">Add Expense</a></li>
+                                    {% endif %}
+
+                                    {% if "show-expense-category" in permission %}
+                                    <li><a href="{% url 'show_expance_category' %}">Expense Category List</a></li>
+                                    {% endif %}
+
+                                    {% if "add-expense-category" in permission %}
+                                    <li><a href="{% url 'add_expance_category' %}">Add Expense Category</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>   
+                            {% endif %}
+                            {% comment %} <li class="submenu">
+                                <a href="javascript:void(0);"><span> Quotation</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="quotationList.html">Quotation List</a></li>
+                                    <li><a href="addquotation.html">Add Quotation</a></li>
+                                </ul>
+                            </li> {% endcomment %}
+                            {% comment %} <li class="submenu">
+                                <a href="javascript:void(0);"><span> Transfer</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    <li><a href="transferlist.html">Transfer  List</a></li>
+                                    <li><a href="addtransfer.html">Add Transfer </a></li>
+                                    <li><a href="importtransfer.html">Import Transfer </a></li>
+                                </ul>
+                            </li> {% endcomment %}
+
+                            {% if "show-sales-return" in permission or  "add-sales-return" in permission or "show-purchase-return" in permission or "add-purchase-return" in permission %}
+                             <li class="submenu">
+                                <a href="javascript:void(0);"><span> Return</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    {% if "show-sales-return" in permission %}
+                                    <li><a href="{% url 'salesreturnlist' %}">Sales Return List</a></li>
+                                    {% endif %}
+
+                                    {% if "add-sales-return" in permission %}
+                                    <li><a href="{% url 'addsalesreturn' %}">Add Sales Return </a></li>
+                                    {% endif %}
+
+                                    {% if "show-purchase-return" in permission %}
+                                    <li><a href="{% url 'show_purchase_return'%}">Purchase Return List</a></li>
+                                    {% endif %}
+
+                                    {% if "add-purchase-return" in permission %}
+                                    <li><a href="{% url 'add_purchase_return'%}">Add Purchase Return </a></li>
+                                    {% endif %}
+                                </ul>
+                            </li> 
+                            {% endif %}
+                            {% if "show-customer" in permission or "add-customer" in permission or "show-supplier" in permission or "add-supplier" in permission %}
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> People</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    {% if "show-customer" in permission %}
+                                    <li><a href="{% url 'show_customer'%}">Customer List</a></li>
+                                    {% endif %}
+
+                                    {% if "add-customer" in permission %}
+                                    <li><a href="{% url 'add_customer' %}">Add Customer  </a></li>
+                                    {% endif %}
+
+                                    {% if "show-supplier" in permission %}
+                                    <li><a href="{% url 'show_supplier'%}">Supplier List</a></li>
+                                    {% endif %}
+
+                                    {% if "add-supplier" in permission %}
+                                    <li><a href="{% url 'add_supplier' %}">Add Supplier </a></li>
+                                    {% endif %}
+
+                                     {% comment %} <li><a href="userlist.html">User List</a></li>
+                                    <li><a href="adduser.html">Add User</a></li> 
+                                    <li><a href="storelist.html">Store List</a></li>
+                                    <li><a href="addstore.html">Add Store</a></li>  {% endcomment %}
+                                </ul>
+                            </li>		
+                            {% endif %}												
+                            {% comment %} <li class="submenu">
+                                <a href="javascript:void(0);"><span> Places</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    {% if "add-state" in permission %}
+                                    <li><a href="{% url 'add_state' %}">New State</a></li>
+                                    {% endif %}
+
+                                    {% if "show-state" in permission %}
+                                    <li><a href="{% url 'show_state' %}">State list</a></li>
+                                    {% endif %}
+
+                                    {% if "add-city" in permission %}
+                                    <li><a href="{% url 'add_city' %}">New City </a></li>
+                                    {% endif %}
+
+                                    {% if "show-city" in permission %}
+                                    <li><a href="{% url 'show_city' %}">City list</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li> {% endcomment %}
+                            
+                            {% if "show-sales-report" in permission or "show-purchase-report" in permission or "show-inventory-report" in permission or "show-supplier-report" in permission or  "show-supplier-report" in permission or "show-customer-report" in permission %}
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Reports</span> <span class="menu-arrow"></span></a>
+                                <ul>
+
+                                    {% if "show-sales-report" in permission %}
+                                    <li><a href="{% url 'salesreport' %}">Sales Report</a></li>
+                                    {% endif %}
+                                    
+                                    {% if "show-purchase-report" in permission %}
+                                    <li><a href="{% url 'purchaseorderreport' %}">Purchase Report</a></li>
+                                    {% endif %}
+                                    
+                                    {% if "show-inventory-report" in permission %}
+                                    <li><a href="{% url 'inventoryreport' %}">Inventory Report</a></li>
+                                    {% endif %}
+
+                                    {% if "show-supplier-report" in permission %}
+                                    <li><a href="{% url 'supplierreport' %}">Supplier Report</a></li>
+                                    {% endif %}
+                                    
+                                    {% if "show-customer-report" in permission %}
+                                    <li><a href="{% url 'customerreport' %}">Customer Report</a></li>
+                                    {% endif %}
+                                    
+                                </ul>
+                            </li>
+                            {% endif %}
+
+                            {% if "show-staff" in permission or "show-role" in permission  %}
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Staffs</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    {% if "show-staff" in permission %}
+                                    <li><a href="{% url 'stafflists' %}">Staff </a></li>
+                                    {% endif %}
+
+                                    {% if "show-role" in permission %}
+                                    <li><a href="{% url 'rolelists' %}">Role </a></li>
+                                    {% endif %}
+
+                                    {% comment %} {% if "show-permission" in permission %}
+                                    <li><a href="{% url 'permissionlists' %}">Permission </a></li>
+                                    {% endif %} {% endcomment %}
+                                
+                                </ul>
+                            </li>
+                            {% endif %}
+                            
+                            {% if "show-general-setting" in permission %}
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Settings</span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    {% if "show-general-setting" in permission %}
+                                    <li><a href="{% url 'generaladd' %}">General Settings</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>    
+                            {% endif %}
+
+
+                            {% if "show-payment-setting" in permission  %}
+                            <li class="submenu">
+                                <a href="javascript:void(0);"><span> Payment Type Master </span> <span class="menu-arrow"></span></a>
+                                <ul>
+                                    {% if "show-payment-setting" in permission %}
+                                    {% comment %} <li><a href="{% url 'addpaymenttype' %}">New Payment Type</a></li> {% endcomment %}
+                                    <li><a href="{% url 'paymenttypelist' %}">Payment Type List</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>   
+                            {% endif %}
+                    </ul>
+                    
+                    
+                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Sidebar -->
+
+{% endif %}

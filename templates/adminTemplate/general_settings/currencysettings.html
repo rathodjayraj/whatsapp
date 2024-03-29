@@ -1,0 +1,225 @@
+{% extends 'adminTemplate/base.html' %}
+
+{% load static %}
+
+{% block body  %}
+
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm-8" style="margin-top: 10px; margin-left:-15px; ">
+			<h3><b>Currency Settings</b></h3>
+		</div>
+
+		<div class="col-sm-4 text-end">
+			{% if super_user == "True" or "add-currency" in datas %}
+			<a  class="btn btn-primary" data-bs-toggle="modal" style="color:white;" onclick="add_form()" data-bs-target="#addpayments"><img src="{% static 'posstatic/assets/images/plus.svg' %}" alt="img" class="me-1">Add New Currency</a>
+			{% endif %}
+		</div>
+		<div style="overflow-x:auto;" class="container">
+			<div class="col-13">
+				<table class="table table-bordered mt-3" id="user_role_tableID">
+				<thead>
+						<th>Sr No.</th>
+						<th>Currency name</th>
+						<th>Currency code</th>
+						<th>Currency symbol</th>
+						<th>Status</th>
+
+						{% if super_user == "True" or "update-currency" in datas %}
+						<th class="text-end">Update</th>
+						{% endif %}
+
+						{% if super_user == "True" or "delete-currency" in datas %}
+						<th class="text-end">Delete</th>
+						{% endif %}
+
+					</tr>
+				</thead>
+				<tbody>
+						{% for data in currency_obj %}
+						<tr>
+							<td>{{forloop.counter}}</td>
+							<td>{{data.currency_name}}</td>
+							<td>{{data.currency_code}}</td>
+							<td>{{data.currency_symbol}}</td>
+							<td>
+								<span {% if data.status == "Active" %} class="badges bg-lightgreen" {% else %}class="badges bg-lightred" {% endif %}>{{data.status}}</span>
+							</td>
+
+							{% if super_user == "True" or "update-currency" in datas %}
+							<td>
+								<a onclick="update_form('{{data.currency_name}}',
+								'{{data.currency_code}}',
+								'{{data.currency_symbol}}',
+								'{{data.status}}',
+								'{{data.id}}');" data-bs-toggle="modal" data-bs-target="#addpayments" class="btn btn-success" ><i class="fa-regular fa-pen-to-square"></i></a>
+							</td>
+							{% endif %}
+
+							{% if super_user == "True" or "delete-currency" in datas %}
+							<td> 
+								<a href="{% url 'deletecurrency' data.id %}" onclick="return confirm('Are You Sure,You want to delete this data?');" class="btn btn-danger"><i class='fas fa-trash-alt'></i>
+								</a> 
+							</td>
+							{% endif %}
+
+							{% comment %} <td class="text-end">
+								<a class="me-3" href="javascript:void(0);" 
+								onclick="update_form('{{data.currency_name}}',
+								'{{data.currency_code}}',
+								'{{data.currency_symbol}}',
+								'{{data.status}}',
+								'{{data.id}}');" data-bs-toggle="modal" data-bs-target="#addpayments">
+									<img src="{% static 'posstatic/assets/img/icons/edit.svg' %}" alt="img">
+								</a>
+								<a class="me-3 confirm-text" href="{% url 'deletecurrency' data.id %}" onclick="return confirm('Are You Sure,You want to delete this data?');" >
+									<img src="{% static 'posstatic/assets/img/icons/delete.svg' %}" alt="img">
+								</a>
+							</td> {% endcomment %}
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+		<!-- add Modal -->
+		<div class="modal fade" id="addpayments" tabindex="-1" role="dialog"   aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<form action="/super_admin/addcurrency" id="form" method="post" >
+					{% csrf_token %}
+					<input type="hidden" name="id" id="id">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="hidding" >Add Currency </h5>
+							<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-12">
+									<div class="form-group">
+										<label>Currency Name<span class="manitory">*</span></label>
+										<input type="text" class="form-control"  name="currency_name" id="currency_name">
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+										<label>Currency Code</label>
+										<input type="text"  class="form-control" name="currency_code" id="currency_code">
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+										<label>Currency Symbol<span class="manitory">*</span></label>
+										<input type="text"  class="form-control" name="currency_symbol" id="currency_symbol">
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group mb-0">
+										<label>Status</label>
+										<select  class="form-control"  name="status" id="status">
+											<option>Choose Status</option>
+											<option value="Active"> Active</option>
+											<option value="InActive"> InActive</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" id="btn" class="btn btn-primary">Confirm</button>
+							<button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- edit Modal -->
+		{% comment %} <div class="modal fade" id="editpayment" tabindex="-1" role="dialog"   aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" >Edit  Currency</h5>
+						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-12">
+								<div class="form-group">
+									<label>Currency Name<span class="manitory">*</span></label>
+									<input type="text" placeholder="India - Indian rupee">
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-group">
+									<label>Currency Code</label>
+									<input type="text" placeholder="INR">
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-group">
+									<label>Currency Symbol<span class="manitory">*</span></label>
+									<input type="text" placeholder="₹">
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-group mb-0">
+									<label>Status</label>
+									<select class="select">
+										<option> Active</option>
+										<option> InActive</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-submit">Update</button>
+						<button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div> {% endcomment %}
+		<!-- /Main Wrapper -->
+		 
+
+<script>
+function update_form(c_name,c_code,c_symbol,c_status,c_id){
+	console.log(c_status)
+		$('#form').attr('action', '/super_admin/updatecurrency');
+		$('#currency_name').val(c_name);
+		$('#currency_code').val(c_code);
+		$('#currency_symbol').val(c_symbol);
+		$('#id').val(c_id);
+		$('#hidding').text("Edit Currency");
+		//$('#status option[value='+c_status+']').attr("selected", "selected");
+		$('#status option[value='+c_status+']').attr("selected", "selected");
+
+		$('#select2-status-container').html(c_status);
+
+		//document.getElementById('status').getElementsByTagName('option')[c_status].selected = 'selected'
+		$('#btn').text("Update");
+
+	}
+	function add_form(){
+		$('#hidding').text("Add Currency");
+		$('#btn').text("Confirm");
+		$('#form').attr('action', '/super_admin/addcurrency');
+		$('#currency_name').val("");
+		$('#currency_code').val("");
+		$('#currency_symbol').val("");
+		$('#id').val("");
+		$('#select2-status-container').html('Choose Status');
+		
+
+	}
+</script>
+		{% endblock body  %}

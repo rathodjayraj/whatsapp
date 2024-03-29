@@ -1,0 +1,255 @@
+{% load static %}
+
+{% if sidebar_var != "pos"  %}
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Main</h6>
+                    <ul>
+                        <li class="active">
+                            <a href="{% url 'dashboard' %}" ><i data-feather="grid"></i><span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            
+                            <a href="#"><i data-feather="box"></i><span>Chat</span></a>
+                        </li>
+
+                        <li>
+                            
+                            <a href="{% url 'campainlist' %}"><i data-feather="plus-square"></i><span>Campaigns</span></a>
+                        </li>
+                        
+                        <li>
+                            
+                            <a href="{% url 'contactlist' %}"><i data-feather="copy"></i><span>Contacts</span></a>
+                        </li>
+                        
+                        <li>
+                            
+                            <a href="{% url 'templatelist' %}"><i data-feather="codepen"></i><span>Templates</span></a>
+                        </li>
+                        
+                        <li>
+                            
+                            <a href="#"><i data-feather="tag"></i><span>Bot repllies</span></a>
+                        </li>
+                    </ul>								
+                </li>
+                {% if role == "admin" or  "show-unit" in permission or "show-products" in permission or "show-category" in permission or  "show-subcategory" in permission or "show-subcategory" in permission or "show-brand" in permission or "show-inquiry" in permission %}
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Products</h6>
+                    <ul>
+                        {% if role == "admin" or "show-products" in permission %}
+                        <li><a href="{% url 'products' %}"><i data-feather="box"></i><span>Products</span></a></li>
+                        {% endif %}
+
+                        {% if role == "admin" or "add-products" in permission %}
+                        <li><a href="{% url 'addproduct' %}"><i data-feather="plus-square"></i><span>Create Product</span></a></li>
+                        {% endif %}
+                        
+                        {% if role == "admin" or "show-category" in permission %}
+                        <li><a href="{% url 'category' %}"><i data-feather="codepen"></i><span>Category</span></a></li>
+                        {% endif %}
+
+                        {% if role == "admin" or "show-brand" in permission %}
+                        <li><a href="{% url 'show_brand' %}"><i data-feather="tag"></i><span>Brands</span></a></li>
+                        {% endif %}
+                       
+                        {% if role == "admin" or "show-subcategory" in permission %}
+                        <li><a href="{% url 'show_sub_category' %}"><i data-feather="speaker"></i><span>Sub Category</span></a></li>									
+                        {% endif %}
+
+                        {% if role == "admin" or "show-unit" in permission %}
+                        <li><a href="{% url 'unitlists' %}"><i class="fa fa-balance-scale" data-bs-toggle="tooltip" title="" data-bs-original-title="fa fa-balance-scale" aria-label="fa fa-balance-scale"></i><span>Units</span></a></li>									
+                        {% endif %}
+
+                        {% if role == "admin" or "show-tax" in permission %}
+                        <li><a href="{% url 'show_tax' %}"><i class="fa fa-calculator" data-bs-toggle="tooltip" title="" data-bs-original-title="fa fa-calculator" aria-label="fa fa-calculator"></i><span>Taxes</span></a></li>									
+                        {% endif %}
+                        
+                        {% comment %} <li><a href="barcode.html"><i data-feather="align-justify"></i><span>Print Barcode</span></a></li>
+                        <li><a href="importproduct.html"><i data-feather="minimize-2"></i><span>Import Products</span></a></li> {% endcomment %}
+                    </ul>
+                </li>
+                {% endif %}
+                {% if  role == "admin"  or "show-sales" in permission or "add-sales" in permission or "show-pos" in permission %}
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Sales</h6>
+                    <ul>
+                        {% if role == "admin" or "show-sales" in permission %}
+                        <li><a href="{% url 'saleslist' %}"><i data-feather="shopping-cart"></i><span>Sales</span></a></li>
+                        {% endif %}
+                       
+
+                        {% comment %} <li><a href="invoicereport.html"><i data-feather="file-text"></i><span>Invoices</span></a></li> {% endcomment %}
+                       
+                        {% if role == "admin" or "show-sales-return" in permission %}
+                        <li><a href="{% url 'salesreturnlist' %}"><i data-feather="copy"></i><span>Sales Return</span></a></li>	
+                        {% endif %}
+                        
+                        {% comment %} <li><a href="quotationList.html"><i data-feather="save"></i><span>Quotation</span></a></li>								 {% endcomment %}
+                        {% if role == "admin" or "show-pos" in permission %}
+                        <li><a href="{% url 'new_pos' %}"><i data-feather="hard-drive"></i><span>POS</a></li>
+                        {% endif %}
+
+                        {% comment %} <li class="submenu">
+                            <a href="javascript:void(0);"><i data-feather="shuffle"></i><span>Transfer</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                <li><a href="transferlist.html">Transfer List</a></li>
+                                <li><a href="importtransfer.html">Import Transfer </a></li>
+                            </ul>
+                        </li> {% endcomment %}
+                        {% if role == "admin" or "show-sales-return" in permission or "show-purchase-return" in permission %}
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><i data-feather="corner-up-left"></i><span>Return</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                {% if role == "admin" or "show-sales-return" in permission %}
+                                <li><a href="{% url 'salesreturnlist' %}">Sales Return</a></li>
+                                {% endif %}
+
+                                {% if role == "admin" or "show-purchase-return" in permission %}
+                                <li><a href="{% url 'show_purchase_return'%}">Purchase Return</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </li>
+                {% endif %}
+
+                {% if role == "admin" or "show-purchase" in permission or "show-purchase-return" in permission  %}
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Purchases</h6>
+                    <ul>
+                        <li><a href="{% url 'show_purchase' %}"><i data-feather="shopping-bag"></i><span>Purchases</span></a></li>
+                        {% comment %} <li><a href="importpurchase.html"><i data-feather="minimize-2"></i><span>Import Purchases</span></a></li> {% endcomment %}
+                        {% comment %} <li><a href="purchaseorderreport.html"><i data-feather="file-minus"></i><span>Purchase Order</span></a></li> {% endcomment %}
+                        <li><a href="{% url 'show_purchase_return'%}"><i data-feather="refresh-cw"></i><span>Purchase Return</span></a></li>									
+                    </ul>
+                </li>
+                {% endif %}
+
+                {% if role == "admin" or "show-expense" in permission or "show-expense-category" in permission %}
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Finance & Accounts</h6>								
+                    <ul>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><i data-feather="file-text"></i><span>Expense</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                {% if role == "admin" or "show-expense" in permission %}
+                                <li><a href="{% url 'show_expance' %}">Expenses</a></li>
+                                {% endif %}
+
+                                {% if role == "admin" or "show-expense-category" in permission %}
+                                <li><a href="{% url 'show_expance_category' %}">Expense Category</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </li>
+                {% endif %}
+
+                {% if role == "admin" or "show-customer" in permission or "show-supplier" in permission %}
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Peoples</h6>		
+                    <ul>
+                        {% if role == "admin" or "show-customer" in permission  %}
+                        <li><a href="{% url 'show_customer'%}"><i data-feather="user"></i><span>Customers</span></a></li>
+                        {% endif %}
+
+                        {% if role == "admin" or "show-supplier" in permission  %}
+                        <li><a href="{% url 'show_supplier'%}"><i data-feather="users"></i><span>Suppliers</span></a></li>
+                        {% endif %}
+                        
+                        {% comment %} <li><a href="userlist.html"><i data-feather="user-check"></i><span>Users</span></a></li>
+                        <li><a href="storelist.html"><i data-feather="home"></i><span>Stores</span></a></li> {% endcomment %}
+                    </ul>
+                </li>
+                {% endif %}
+
+                {% if role == "admin" or "show-sales-report" in permission or "show-purchase-report" in permission or "show-inventory-report" in permission or "show-supplier-report" in permission or  "show-supplier-report" in permission or "show-customer-report" in permission %}
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Reports</h6>
+                    <ul>
+
+                        {% if role == "admin" or  "show-sales-report" in permission %}
+                        <li><a href="{% url 'salesreport' %}"><i data-feather="bar-chart-2"></i><span>Sales Report</span></a></li>
+                        {% endif %}
+                        
+                        {% if role == "admin" or "show-purchase-report" in permission %}
+                        <li><a href="{% url 'purchaseorderreport' %}"><i data-feather="pie-chart"></i><span>Purchase report</span></a></li>
+                        {% endif %}
+                        
+                        {% if role == "admin" or "show-inventory-report" in permission %}
+                        <li><a href="{% url 'inventoryreport' %}"><i data-feather="credit-card"></i><span>Inventory Report</span></a></li>									
+                        {% endif %}
+                        
+                        {% comment %} <li><a href="invoicereport.html"><i data-feather="file"></i><span>Invoice Report</span></a></li>
+                        <li><a href="purchasereport.html"><i data-feather="bar-chart"></i><span>Purchase Report</span></a></li> {% endcomment %}
+
+                        {% if role == "admin" or "show-supplier-report" in permission %}
+                        <li><a href="{% url 'supplierreport' %}"><i data-feather="database"></i><span>Supplier Report</span></a></li>
+                        {% endif %}
+
+                        {% if role == "admin" or "show-customer-report" in permission %}
+                        <li><a href="{% url 'customerreport' %}"><i data-feather="pie-chart"></i><span>Customer Report</span></a></li>
+                        {% endif %}
+                    </ul>
+                </li>	
+                {% endif %}	
+                
+                {% if role == "admin" or "show-staff" in permission or "show-role" in permission %}
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Staff Management</h6>		
+                    <ul>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><i data-feather="users"></i><span>Manage Staffs</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                {% if role == "admin" or "show-staff" in permission %}
+                                <li><a href="{% url 'stafflists' %}">Staffs</a></li>
+                                {% endif %}
+
+                                {% if role == "admin" or "show-role" in permission %}
+                                <li><a href="{% url 'rolelists' %}">Role</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}			
+                
+                {% if role == "admin" or "show-general-setting" in permission or "show-payment-setting" in permission %}
+                <li class="submenu-open">
+                    <h6 class="submenu-hdr">Settings</h6>		
+                    <ul>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"><i data-feather="settings"></i><span>Settings</span><span class="menu-arrow"></span></a>
+                             
+                                {% if role == "admin" or "show-general-setting" in permission %}
+                                <li><a href="{% url 'generaladd' %}">General Settings</a></li>
+                                {% endif %}
+
+                                {% if role == "admin" or "show-payment-setting" in permission %}
+                                <li><a href="{% url 'paymenttypelist' %}">Payment Settings</a></li>
+                                {% endif %}
+
+                                {% comment %} <li><a href="taxrates.html">Tax Rates</a></li> {% endcomment %}
+                            </ul>
+                        </li>
+                        {% comment %} <li>
+                            <a href="signin.html" ><i data-feather="log-out"></i><span>Logout</span> </a>
+                        </li> {% endcomment %}
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /Sidebar -->
+{% endif %}

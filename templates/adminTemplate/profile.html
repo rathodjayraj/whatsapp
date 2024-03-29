@@ -1,0 +1,151 @@
+{% extends 'adminTemplate/base.html' %}
+
+{% load static %}
+
+{% block body  %}
+
+<div class="page-wrapper">
+	<div class="content">
+		<div class="page-header">
+			<div class="page-title">
+				<h4>Profile</h4>
+				<h6>User Profile</h6>
+			</div>
+		</div>
+		<!-- /product list -->
+		<div class="card">
+			<div class="card-body">
+				<div class="profile-set">
+					<div class="profile-head">
+						
+					</div>
+					<form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<input type="hidden" id="" value="{{owner_id}}" name="owner_id">
+						<input type="hidden" id="" value="{{staff_id}}" name="staff_id">
+						
+						
+							<div class="row profile-top">
+								<div class="col-lg-6 col-sm-12 profile-content">
+									<div class="form-group">
+
+										<div class="profile-contentimg">
+											{% comment %} {% if owner_img == '' %}
+												<img src="{% static 'posstatic/assets/img/customer/customer5.jpg' %}" alt="img" id="blah">
+											{% else %} {% endcomment %}
+											
+												<img  style="height:100px; width:120px;" {% if owner_img == None %} src="{{staff_img.url}}" {% else %} src="{{owner_img.url}}" {% endif %} alt="img" id="blah">
+											
+											{% comment %} {% endif %} {% endcomment %}
+											<div class="profileupload">
+												<input type="file" id="imgInp" name="img">
+												<a href="javascript:void(0);" ><img src="{% static 'posstatic/assets/img/icons/edit-set.svg' %}"  alt="img"></a>
+											</div>
+										</div>
+										
+										<div class="profile-contentname">
+											<h2>{{request.user.username}}</h2>
+											<h4>Updates Your Photo and Personal Details.</h4>
+										</div>
+									</div>
+								</div>
+						
+								{% if company_img != None %}
+								<div class="col-lg-6 col-sm-12 profile-content" style="margin-top: -15px;">
+									<div class="form-group">
+										<div class="profile-contentimg" >
+											{% comment %} {% if owner_img == '' %}
+												<img src="{% static 'posstatic/assets/img/customer/customer5.jpg' %}" alt="img" id="blah">
+											{% else %} {% endcomment %}
+												<img style="height:100px; width:120px;" src="{{company_img.url}}" alt="img" id="blah">
+											{% comment %} {% endif %} {% endcomment %}
+											<div class="profileupload">
+												<input type="file" id="company_img" name="company_img">
+												<a href="javascript:void(0);" ><img src="{% static 'posstatic/assets/img/icons/edit-set.svg' %}"  alt="img"></a>
+											</div>
+										</div>
+								
+										<div class="profile-contentname">
+											<h4>Updates Your Company Photo.</h4>
+										</div>
+									</div>
+								</div>
+								{% endif %}
+							</div>
+					
+				
+				<div class="row">
+		
+						<div class="col-lg-6 col-sm-12">
+							<div class="form-group">
+								<label>First Name</label>
+								<input type="text"  name="first_name" {% if request.user.first_name == None %} value="{{first_name}}" {% else %} value="{{request.user.first_name}}" {% endif %} >
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-12">
+							<div class="form-group">
+								<label>Last Name</label>
+								<input type="text"  name="last_name" {% if request.user.last_name == None %} value="{{last_name}}" {% else %} value="{{request.user.last_name}}" {% endif %} > 
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-12">
+							<div class="form-group">
+								<label>E-mail</label>
+								<input type="text"  name="mail" {% if request.user.email == None %} value="{{email}}" {% else %} value="{{request.user.email}}" {% endif %} >
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-12">
+							<div class="form-group">
+								<label>Phone</label>
+								<input type="text"  name="phone_number"  value="{{phone}}"    >
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-12">
+							<div class="form-group">
+								<label>User Name</label>
+								<input type="text"  name="username" {% if request.user.first_name == None %} value="{{first_name}}" {% else %} value="{{request.user.username}}" {% endif %} >
+							</div>
+						</div>
+						<div class="col-lg-6 col-sm-12">
+							<div class="form-group">
+								<label>Password</label>
+								<div class="pass-group">
+									<input type="password" class="" name="password" value="*****">
+									{% comment %} <span class="fas toggle-password fa-eye-slash"></span> {% endcomment %}
+								</div>
+							</div>
+						</div>
+						{% if company_name != None %}
+						<div class="col-lg-6 col-sm-12">
+							<div class="form-group">
+								<label>Company Name</label>
+									<input type="text"  name="company_name" value="{{company_name}}">
+
+							</div>
+						</div>
+						{% endif %}
+
+						{% if gst_number != None %}
+						<div class="col-lg-6 col-sm-12">
+							<div class="form-group">
+								<label>Gst Number</label>
+									<input type="text"  name="gst_number" value="{{gst_number}}">
+
+ 							</div>
+						</div>
+						{% endif %}
+
+						<div class="col-12">
+							<button type="submit" class="btn btn-submit me-2" >Submit</button>
+							<a href="{% url 'dashboard' %}"  class="btn btn-cancel">Cancel</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- /product list -->
+	</div>
+</div>
+
+
+{% endblock body  %}
